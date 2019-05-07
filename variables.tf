@@ -23,7 +23,7 @@ variable "template_name" {
 }
 
 variable "instance_count" {
-  type = "number"
+  type = "string"
   default = 1
 }
 
@@ -36,13 +36,13 @@ variable "annotation" {
 }
 
 variable "cpu" {
-  type = "number"
+  type = "string"
   default = 1
 }
 
 variable "memory" {
   # Memory in Mb
-  type = "number"
+  type = "string"
   default = 1024
 }
 
