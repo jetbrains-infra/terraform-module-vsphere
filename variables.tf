@@ -2,6 +2,14 @@ variable "datacenter" {
   type = "string"
 }
 
+variable "host" {
+  type = "string"
+}
+
+variable "resource_pool" {
+  type = "string"
+}
+
 variable "datastore" {
   type = "string"
 }
@@ -10,29 +18,16 @@ variable "network" {
   type = "string"
 }
 
-variable "resource_pool" {
+variable "folder" {
   type = "string"
-}
-
-variable "host" {
-  type = "string"
-}
-
-variable "template_name" {
-  type = "string"
-}
-
-variable "instance_count" {
-  type = "string"
-  default = 1
 }
 
 variable "name" {
   type = "string"
 }
 
-variable "annotation" {
-  default = "Created with https://github.com/rvadim/terraform-module-vsphere"
+variable "template_name" {
+  type = "string"
 }
 
 variable "cpu" {
@@ -50,8 +45,13 @@ variable "domain" {
   type = "string"
 }
 
-variable "folder" {
+variable "instances_count" {
   type = "string"
+  default = 1
+}
+
+variable "annotation" {
+  default = "Created with https://github.com/rvadim/terraform-module-vsphere"
 }
 
 variable "disk_label" {

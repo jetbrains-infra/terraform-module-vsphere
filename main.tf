@@ -28,8 +28,8 @@ data vsphere_virtual_machine "template" {
 }
 
 resource "vsphere_virtual_machine" "vm" {
-  count = "${var.instance_count}"
-  name =  "${var.name}"
+  count = "${var.instances_count}"
+  name =  "${var.instances_count == 1 ? var.name : "${var.name}-${count.index}" }"
   resource_pool_id = "${data.vsphere_resource_pool.resource-pool.id}"
   datastore_id = "${data.vsphere_datastore.datastore.id}"
   folder = "${var.folder}"
@@ -60,7 +60,7 @@ resource "vsphere_virtual_machine" "vm" {
 
     customize {
       linux_options {
-        host_name = "${var.name}"
+        host_name = "${var.instances_count == 1 ? var.name : "${var.name}-${count.index}" }"
         domain    = "${var.domain}"
       }
 
