@@ -27,6 +27,12 @@ data vsphere_virtual_machine "template" {
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
+resource "vsphere_folder" "folder" {
+  path          = "${var.folder}"
+  type          = "vm"
+  datacenter_id = "${data.vsphere_datacenter.dc.id}"
+}
+
 resource "vsphere_virtual_machine" "vm" {
   count = "${var.instances_count}"
   name =  "${var.instances_count == 1 ? var.name : "${var.name}-${count.index}" }"
