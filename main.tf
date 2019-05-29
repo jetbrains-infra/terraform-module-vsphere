@@ -49,8 +49,8 @@ resource "vsphere_virtual_machine" "vm" {
     label = "${var.disk_label}"
 
     datastore_id = "${data.vsphere_datastore.datastore.id}"
-    size             = "${data.vsphere_virtual_machine.template.disks.0.size}"
-    eagerly_scrub    = "${data.vsphere_virtual_machine.template.disks.0.eagerly_scrub}"
+    size = "${var.disk_size_gb == "0" ? data.vsphere_virtual_machine.template.disks.0.size : var.disk_size_gb}"
+    eagerly_scrub = "${data.vsphere_virtual_machine.template.disks.0.eagerly_scrub}"
     thin_provisioned = "${data.vsphere_virtual_machine.template.disks.0.thin_provisioned}"
   }
 
@@ -61,7 +61,7 @@ resource "vsphere_virtual_machine" "vm" {
     customize {
       linux_options {
         host_name = "${var.instances_count == 1 ? var.name : "${var.name}-${count.index}" }"
-        domain    = "${var.domain}"
+        domain = "${var.domain}"
       }
 
       network_interface {}

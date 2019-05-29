@@ -50,6 +50,11 @@ variable "instances_count" {
   default = 1
 }
 
+variable "disk_size_gb" {
+  # 0 (zero) means same size as at template
+  default = 0
+}
+
 variable "annotation" {
   default = "Created with https://github.com/rvadim/terraform-module-vsphere"
 }
