@@ -30,7 +30,7 @@ data vsphere_virtual_machine "template" {
 resource "vsphere_virtual_machine" "vm" {
   count            = "${var.instances_count}"
   name             = "${var.instances_count == 1 ? var.name : "${var.name}-${count.index}"}"
-  resource_pool_id = "${data.vsphere_compute_cluster.compute_cluster.resource_pool_id}"
+  resource_pool_id = "${data.vsphere_resource_pool.resource-pool.id}"
   datastore_id     = "${data.vsphere_datastore.datastore.id}"
   folder           = "${var.folder}"
   host_system_id   = "${data.vsphere_host.host.id}"
