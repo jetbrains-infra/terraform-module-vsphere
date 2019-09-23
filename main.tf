@@ -3,65 +3,65 @@ data vsphere_datacenter dc {
 }
 
 data vsphere_datastore datastore {
-  name = "${var.datastore}"
+  name          = "${var.datastore}"
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
 data vsphere_network network {
-  name = "${var.network}"
+  name          = "${var.network}"
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
 data vsphere_resource_pool resource-pool {
-  name = "${var.host}/${var.resource_pool}"
+  name          = "${var.resource_pool}"
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
 data vsphere_host host {
-  name = "${var.host}"
+  name          = "${var.host}"
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
 data vsphere_virtual_machine "template" {
-  name = "${var.template_name}"
+  name          = "${var.template_name}"
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
 resource "vsphere_virtual_machine" "vm" {
-  count = "${var.instances_count}"
-  name =  "${var.instances_count == 1 ? var.name : "${var.name}-${count.index}" }"
-  resource_pool_id = "${data.vsphere_resource_pool.resource-pool.id}"
-  datastore_id = "${data.vsphere_datastore.datastore.id}"
-  folder = "${var.folder}"
-  host_system_id = "${data.vsphere_host.host.id}"
-  annotation = "${var.annotation}"
+  count            = "${var.instances_count}"
+  name             = "${var.instances_count == 1 ? var.name : "${var.name}-${count.index}"}"
+  resource_pool_id = "${data.vsphere_compute_cluster.compute_cluster.resource_pool_id}"
+  datastore_id     = "${data.vsphere_datastore.datastore.id}"
+  folder           = "${var.folder}"
+  host_system_id   = "${data.vsphere_host.host.id}"
+  annotation       = "${var.annotation}"
 
   num_cpus = "${var.cpu}"
-  memory = "${var.memory}"
+  memory   = "${var.memory}"
   guest_id = "${data.vsphere_virtual_machine.template.guest_id}"
 
   network_interface {
-    network_id = "${data.vsphere_network.network.id}"
+    network_id   = "${data.vsphere_network.network.id}"
     adapter_type = "${data.vsphere_virtual_machine.template.network_interface_types[0]}"
   }
 
   disk {
     label = "${var.disk_label}"
 
-    datastore_id = "${data.vsphere_datastore.datastore.id}"
-    size = "${var.disk_size_gb == "0" ? data.vsphere_virtual_machine.template.disks.0.size : var.disk_size_gb}"
-    eagerly_scrub = "${data.vsphere_virtual_machine.template.disks.0.eagerly_scrub}"
+    datastore_id     = "${data.vsphere_datastore.datastore.id}"
+    size             = "${var.disk_size_gb == "0" ? data.vsphere_virtual_machine.template.disks.0.size : var.disk_size_gb}"
+    eagerly_scrub    = "${data.vsphere_virtual_machine.template.disks.0.eagerly_scrub}"
     thin_provisioned = "${data.vsphere_virtual_machine.template.disks.0.thin_provisioned}"
   }
 
   clone {
     template_uuid = "${data.vsphere_virtual_machine.template.id}"
-    linked_clone = false
+    linked_clone  = false
 
     customize {
       linux_options {
-        host_name = "${var.instances_count == 1 ? var.name : "${var.name}-${count.index}" }"
-        domain = "${var.domain}"
+        host_name = "${var.instances_count == 1 ? var.name : "${var.name}-${count.index}"}"
+        domain    = "${var.domain}"
       }
 
       network_interface {}
