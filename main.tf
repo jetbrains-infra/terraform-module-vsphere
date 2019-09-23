@@ -13,7 +13,7 @@ data vsphere_network network {
 }
 
 data vsphere_resource_pool resource-pool {
-  name          = "${var.resource_pool}"
+  name          = "/${var.datacenter}/host/${var.host}/Resources/${var.resource_pool}"
   datacenter_id = "${data.vsphere_datacenter.dc.id}"
 }
 
