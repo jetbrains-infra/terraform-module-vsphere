@@ -62,3 +62,7 @@ variable "annotation" {
 variable "disk_label" {
   default = "disk0"
 }
+
+variable "nested_hv_enabled" {
+  default = false
+}

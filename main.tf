@@ -37,6 +37,7 @@ resource "vsphere_virtual_machine" "vm" {
   annotation       = "${var.annotation}"
 
   num_cpus = "${var.cpu}"
+  nested_hv_enabled = "${var.nested_hv_enabled}"
   memory   = "${var.memory}"
   guest_id = "${data.vsphere_virtual_machine.template.guest_id}"
 
