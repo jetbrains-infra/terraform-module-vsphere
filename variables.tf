@@ -66,3 +66,7 @@ variable "disk_label" {
 variable "nested_hv_enabled" {
   default = false
 }
+
+variable "firmware" {
+  default = "bios"
+}
