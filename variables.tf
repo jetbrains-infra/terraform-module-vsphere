@@ -70,3 +70,7 @@ variable "nested_hv_enabled" {
 variable "firmware" {
   default = "bios"
 }
+
+variable "mac_address" {
+  default = null
+}
