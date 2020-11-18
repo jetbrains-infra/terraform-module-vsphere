@@ -74,3 +74,12 @@ variable "firmware" {
 variable "mac_address" {
   default = null
 }
+variable "ipv4_address" {
+  default = null
+}
+variable "ipv4_netmask" {
+  default = null
+}
+variable "ipv4_gateway" {
+  default = null
+}
