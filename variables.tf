@@ -51,12 +51,13 @@ variable "instances_count" {
 }
 
 variable "disk_size_gb" {
+  type = "string"
   # 0 (zero) means same size as at template
   default = 0
 }
 
 variable "annotation" {
-  default = "Created with https://github.com/rvadim/terraform-module-vsphere"
+  default = "Created with https://github.com/jetbrains-infra/terraform-module-vsphere"
 }
 
 variable "disk_label" {
