@@ -1,57 +1,57 @@
 variable "datacenter" {
-  type = "string"
+  type = string
 }
 
 variable "host" {
-  type = "string"
+  type = string
 }
 
 variable "resource_pool" {
-  type = "string"
+  type = string
 }
 
 variable "datastore" {
-  type = "string"
+  type = string
 }
 
 variable "network" {
-  type = "string"
+  type = string
 }
 
 variable "folder" {
-  type = "string"
+  type = string
 }
 
 variable "name" {
-  type = "string"
+  type = string
 }
 
 variable "template_name" {
-  type = "string"
+  type = string
 }
 
 variable "cpu" {
-  type = "string"
+  type = string
   default = 1
 }
 
 variable "memory" {
   # Memory in Mb
-  type = "string"
+  type = string
   default = 1024
 }
 
 variable "domain" {
-  type = "string"
+  type = string
 }
 
 variable "instances_count" {
-  type = "string"
+  type = string
   default = 1
 }
 
 variable "disk_size_gb" {
-  type = "string"
+  type = string
   # 0 (zero) means same size as at template
   default = 0
 }
